@@ -12,7 +12,7 @@ print(A)
 
 lambdas, V = np.linalg.eig(A) 
 
-# V has 2 columns, since A has two columns. Each column is an eigenvector.
+# V has 2 columns, since A has two columns. Each column is an eigenvector of A.
 print('\nV (Eigenvectors):')
 print(V)
 
@@ -20,21 +20,23 @@ print('\nLamdas (Eigenvalues):')
 print(lambdas)
 
 # First eigenvector of V (lightblue)
-v = V[:,0] # v
+v1 = V[:,0] # v
 
-print('\nv:', v)
+print('\n1st Eigenvector (v):')
+print(v1)
 
-# Get the eigenvalue for the first eigenvector
-lam = lambdas[0] # λ
+# Get the eigenvalue (λ) for the first eigenvector
+lam1 = lambdas[0]
 
-print("\nλ:", lam)
+print("\n1st Eigenvalue (λ):")
+print(lam1)
 
 # Av (blue)
-Av = np.dot(A, v)
+Av = np.dot(A, v1)
 print('\nAv:', Av)
 
 # λv (blue)
-lam_v = np.dot(lam, v)
+lam_v = np.dot(lam1, v1)
 print('\nλv:', lam_v)
 
 # Av = λv
