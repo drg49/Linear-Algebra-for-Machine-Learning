@@ -20,7 +20,7 @@ imgmat = np.matrix(imgmat)
 U, sigma, V = np.linalg.svd(imgmat)
 
 # Reconstruct the image
-new_img = np.matrix(U[:, :1]) * np.diag(sigma[:1]) * np.matrix(V[:1, :])
+new_img = np.matrix(U[:, :5]) * np.diag(sigma[:5]) * np.matrix(V[:5, :])
 
-plt.imshow(img, cmap='gray')
+plt.imshow(new_img, cmap='gray')
 plt.show()
