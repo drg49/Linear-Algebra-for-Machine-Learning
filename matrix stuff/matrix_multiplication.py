@@ -17,6 +17,6 @@ w = torch.tensor([
     [4],
 ], dtype=torch.float32)
 
-# “The result is a 3×1 tensor representing the predicted values `y` for each of the 3 samples
+# The result is a 3×1 tensor representing the predicted values `y` for each of the 3 samples
 y = torch.matmul(X, w)
 print(y)
