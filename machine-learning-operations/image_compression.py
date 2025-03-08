@@ -16,6 +16,8 @@ imgmat.shape = (img.size[1], img.size[0])
 # Convert image data to a matrix
 imgmat = np.matrix(imgmat)
 
+print(imgmat)
+
 # Get the SVD of the image
 U, sigma, V = np.linalg.svd(imgmat)
 

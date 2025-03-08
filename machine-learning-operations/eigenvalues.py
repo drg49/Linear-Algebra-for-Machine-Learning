@@ -1,5 +1,17 @@
 import numpy as np
-from matplot.plot_functions import plot_vectors
+import matplotlib.pyplot as plt
+
+def plot_vectors(vectors, colors, xlim, ylim):
+    plt.figure()
+    plt.axvline(x=0, color='grey', lw=1)
+    plt.axhline(y=0, color='grey', lw=1)
+    for i in range(len(vectors)):
+        plt.quiver(0, 0, vectors[i][0], vectors[i][1], angles='xy', scale_units='xy', scale=1, color=colors[i])
+    plt.xlim(xlim)
+    plt.ylim(ylim)
+    plt.grid()
+    plt.show()
+
 
 # Av = λv
 
@@ -42,4 +54,4 @@ print('\nλv:', lam_v)
 # Av = λv
 
 # Plot the vector with a custom color
-plot_vectors([Av, v], ['blue', 'lightblue'], (-3, 3), (-3, 3))
+plot_vectors([Av, v1], ['blue', 'lightblue'], (-3, 3), (-3, 3))
