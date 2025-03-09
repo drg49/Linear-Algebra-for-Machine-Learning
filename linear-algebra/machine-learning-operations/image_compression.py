@@ -5,7 +5,7 @@ import numpy as np
 # Image Compression with Singular Value Decomposition
 
 # Load the image and convert it to grayscale (to prevent complexity with colors)
-img = Image.open("./images/dog.JPG").convert('LA')
+img = Image.open("./linear-algebra/images/dog.JPG").convert('LA')
 
 imgmat = np.array(list(img.getdata(band=0)), float)
 
