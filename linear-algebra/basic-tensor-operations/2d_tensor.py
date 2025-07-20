@@ -24,4 +24,4 @@ print("Size:", X.size) # 6 or (3 * 2)
 print("First row in the matrix:", X[0,:])
 
 # # Get the second column in the matrix
-# print("Second column in the matrix:", X[:,1])
+print("Second column in the matrix:", X[:,1])

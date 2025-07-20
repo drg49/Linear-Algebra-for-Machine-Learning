@@ -17,6 +17,8 @@ w = torch.tensor([
     [4],
 ], dtype=torch.float32)
 
+# Remember for matrix multiplication, the number of columns in `X` must match the number of rows in `w`
+
 # The result is a 3×1 tensor representing the predicted values `y` for each of the 3 samples
 y = torch.matmul(X, w)
 print(y)
