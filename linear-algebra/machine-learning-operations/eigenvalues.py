@@ -32,10 +32,10 @@ print('\nLamdas (Eigenvalues):')
 print(lambdas)
 
 # First eigenvector of V (lightblue)
-v1 = V[:,0] # v
+v = V[:,0]
 
 print('\n1st Eigenvector (v):')
-print(v1)
+print(v)
 
 # Get the eigenvalue (λ) for the first eigenvector
 lam1 = lambdas[0]
@@ -44,14 +44,14 @@ print("\n1st Eigenvalue (λ):")
 print(lam1)
 
 # Av (blue)
-Av = np.dot(A, v1)
+Av = np.dot(A, v)
 print('\nAv:', Av)
 
 # λv (blue)
-lam_v = np.dot(lam1, v1)
+lam_v = np.dot(lam1, v)
 print('\nλv:', lam_v)
 
 # Av = λv
 
 # Plot the vector with a custom color
-plot_vectors([Av, v1], ['blue', 'lightblue'], (-3, 3), (-3, 3))
+plot_vectors([Av, v], ['blue', 'lightblue'], (-3, 3), (-3, 3))
