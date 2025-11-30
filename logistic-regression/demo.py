@@ -4,7 +4,7 @@ import numpy as np
 # REAL WORLD TITANIC DATASET (SMALL CLEAN SUBSET)
 # --------------------------------------------------
 # Columns:
-# Pclass, Sex (0=female,1=male), Age, Fare, Survived
+# Pclass, Sex (0=female,1=male), Age, Fare, Survived (0=died, 1=survived)
 
 data = np.array([
     [3, 1, 22, 7.25, 0],
@@ -54,6 +54,14 @@ def loss_fn(y_true, y_pred):
         (1 - y_true) * np.log(1 - y_pred + eps)
     )
 
+def print_survival_probs(probs):
+    """Print probability and human-readable survival status for each row."""
+    probs = probs.ravel()
+    labels = (probs >= 0.5).astype(int)
+    for i, p in enumerate(probs):
+        status = "Survived" if labels[i] == 1 else "Died"
+        print(f"({i:02d}) {p:.3f} -> {status}")
+
 # --------------------------------------------------
 # Initialize weights
 # --------------------------------------------------
@@ -77,7 +85,7 @@ for epoch in range(epochs):
         print(f"\n--- Epoch {epoch} ---")
         print(f"\nWeights: {w.ravel()} Bias: {b}")
         print(f"Predictions:")
-        print(y_pred)
+        print_survival_probs(y_pred)
 
     # loss
     loss = loss_fn(y, y_pred)
