@@ -70,10 +70,14 @@ epochs = 2000
 for epoch in range(epochs):
     # forward pass
     z = X @ w + b
-    if (epoch % 200) == 0:
-        print(f"\nWeights at epoch {epoch}: {w.ravel()} Bias: {b}")
         
     y_pred = sigmoid(z)
+
+    if (epoch % 200) == 0:
+        print(f"\n--- Epoch {epoch} ---")
+        print(f"\nWeights: {w.ravel()} Bias: {b}")
+        print(f"Predictions:")
+        print(y_pred)
 
     # loss
     loss = loss_fn(y, y_pred)
@@ -90,7 +94,7 @@ for epoch in range(epochs):
     if epoch % 200 == 0:
         pred_labels = (y_pred >= 0.5).astype(int)
         acc = (pred_labels == y).mean()
-        print(f"Epoch {epoch}: Loss={loss:.4f} Accuracy={acc:.3f}")
+        print(f"Loss={loss:.4f} Accuracy={acc:.3f}")
 
 # --------------------------------------------------
 # Final evaluation
