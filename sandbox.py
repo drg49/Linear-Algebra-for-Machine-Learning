@@ -6,4 +6,4 @@ A = np.array([
 ])
 
 trace = np.trace(A)
-print(A.T)
+print(trace)

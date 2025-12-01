@@ -31,6 +31,8 @@ y = data[:, -1].reshape(-1, 1)  # labels (0/1)
 # --------------------------------------------------
 # Standardize features (important for gradient descent)
 # --------------------------------------------------
+# If we don't standardize, features with larger scales (e.g., Fare)
+# can dominate the learning process, leading to poor convergence.
 X_mean = X.mean(axis=0)
 X_std  = X.std(axis=0)
 # When we do (X - X_mean), we are centering the data around 0
@@ -54,12 +56,13 @@ def loss_fn(y_true, y_pred):
         (1 - y_true) * np.log(1 - y_pred + eps)
     )
 
+# --------------------------------------------------
+# Print survival probabilities
+# --------------------------------------------------
 def print_survival_probs(probs):
-    """Print probability and human-readable survival status for each row."""
     probs = probs.ravel()
-    labels = (probs >= 0.5).astype(int)
     for i, p in enumerate(probs):
-        status = "Survived" if labels[i] == 1 else "Died"
+        status = "Survived" if p >= 0.5 else "Died"
         print(f"({i:02d}) {p:.3f} -> {status}")
 
 # --------------------------------------------------
