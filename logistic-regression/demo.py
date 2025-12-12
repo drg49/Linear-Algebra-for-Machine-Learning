@@ -79,7 +79,7 @@ epochs = 2000
 # Training loop (pure NumPy)
 # --------------------------------------------------
 for epoch in range(epochs):
-    # forward pass
+    # forward pass: the process of making predictions
     z = X @ w + b
         
     y_pred = sigmoid(z)
@@ -87,6 +87,8 @@ for epoch in range(epochs):
     if (epoch % 200) == 0:
         print(f"\n--- Epoch {epoch} ---")
         print(f"\nWeights: {w.ravel()} Bias: {b}")
+        print(f"Linear combination (z):")
+        print(z)
         print(f"Predictions:")
         print_survival_probs(y_pred)
 
@@ -98,9 +100,8 @@ for epoch in range(epochs):
     dw = (X.T @ dz) / len(X)
     db = np.mean(dz)
 
-    # update
-    w -= learning_rate * dw
-    b -= learning_rate * db
+    w -= learning_rate * dw   # update weights
+    b -= learning_rate * db   # update bias
 
     if epoch % 200 == 0:
         pred_labels = (y_pred >= 0.5).astype(int)

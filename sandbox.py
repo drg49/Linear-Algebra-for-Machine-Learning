@@ -41,3 +41,5 @@ y_pred = sigmoid(z)
 
 print("\nPredicted probabilities:")
 print(y_pred)
+
+# Now we need to figure out how we got these weights and bias!
