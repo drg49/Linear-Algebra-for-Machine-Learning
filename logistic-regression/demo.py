@@ -61,9 +61,9 @@ def loss_fn(y_true, y_pred):
 # --------------------------------------------------
 def print_survival_probs(probs):
     probs = probs.ravel()
-    for i, p in enumerate(probs):
+    for index, p in enumerate(probs):
         status = "Survived" if p >= 0.5 else "Died"
-        print(f"({i:02d}) {p:.3f} -> {status}")
+        print(f"({index:02d}) {p:.3f} -> {status}")
 
 # --------------------------------------------------
 # Initialize weights
@@ -74,6 +74,9 @@ b = 0.0
 
 learning_rate = 0.1
 epochs = 2000
+
+print("Y:")
+print(y)
 
 # --------------------------------------------------
 # Training loop (pure NumPy)
