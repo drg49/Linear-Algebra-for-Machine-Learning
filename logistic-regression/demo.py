@@ -49,11 +49,11 @@ def sigmoid(z):
 # --------------------------------------------------
 # Binary cross entropy loss
 # --------------------------------------------------
-def loss_fn(y_true, y_pred):
+def loss_fn(y_true, y_prediction):
     eps = 1e-9
     return -np.mean(
-        y_true * np.log(y_pred + eps) +
-        (1 - y_true) * np.log(1 - y_pred + eps)
+        y_true * np.log(y_prediction + eps) +
+        (1 - y_true) * np.log(1 - y_prediction + eps)
     )
 
 # --------------------------------------------------
@@ -75,7 +75,9 @@ b = 0.0
 learning_rate = 0.1
 epochs = 2000
 
-print("Y:")
+print("X - Standardized Features (pclass, sex, age, fare):")
+print(X)
+print("Y (Output):")
 print(y)
 
 # --------------------------------------------------
@@ -85,21 +87,22 @@ for epoch in range(epochs):
     # forward pass: the process of making predictions
     z = X @ w + b
         
-    y_pred = sigmoid(z)
+    y_prediction = sigmoid(z)
 
     if (epoch % 200) == 0:
         print(f"\n--- Epoch {epoch} ---")
-        print(f"\nWeights: {w.ravel()} Bias: {b}")
-        print(f"Linear combination (z):")
+        print(f"\nWeights: {w.ravel()}")
+        print(f"Bias: {b}")
+        print(f"Linear combination (z = X @ w + b):")
         print(z)
-        print(f"Predictions:")
-        print_survival_probs(y_pred)
+        print(f"Y Predictions:")
+        print_survival_probs(y_prediction)
 
     # loss
-    loss = loss_fn(y, y_pred)
+    loss = loss_fn(y, y_prediction)
 
     # gradients
-    dz = y_pred - y
+    dz = y_prediction - y
     dw = (X.T @ dz) / len(X)
     db = np.mean(dz)
 
@@ -107,7 +110,7 @@ for epoch in range(epochs):
     b -= learning_rate * db   # update bias
 
     if epoch % 200 == 0:
-        pred_labels = (y_pred >= 0.5).astype(int)
+        pred_labels = (y_prediction >= 0.5).astype(int)
         acc = (pred_labels == y).mean()
         print(f"Loss={loss:.4f} Accuracy={acc:.3f}")
 
