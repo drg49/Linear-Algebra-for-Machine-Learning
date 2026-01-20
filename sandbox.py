@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 
 # Visualize the logistic regression prediction process
 
@@ -20,26 +21,44 @@ X = np.array([
 	[ 0.76696499, -1.06904497, -0.88465105, -0.95834498],
 ])
 
+fig, ax = plt.subplots(figsize=(14, 6))
+ax.axis('tight')
+ax.axis('off')
 
-w = np.array([
- [-0.69154847],
- [-2.43767599],
- [ 0.13829872],
- [ 0.46298898]
- ])
+# Create table with 4 decimal places
+table_data = np.round(X.T, 4)
+columns = [f'S{i}' for i in range(X.shape[0])]
+rows = ['pclass', 'sex', 'age', 'fare']
 
-b = 0.4220075973409705
+table = ax.table(cellText=table_data, rowLabels=rows, colLabels=columns, 
+                 cellLoc='center', loc='center', bbox=[0, 0, 1, 1])
+table.auto_set_font_size(False)
+table.set_fontsize(9)
+table.scale(1, 1.5)
 
-z = np.matmul(X, w) + b
+plt.title('X.T (Transposed Feature Matrix)', pad=20, fontsize=14)
+plt.show()
 
-print(z)
 
-def sigmoid(z):
-    return 1 / (1 + np.exp(-z))
+# w = np.array([
+#  [-0.69154847],
+#  [-2.43767599],
+#  [ 0.13829872],
+#  [ 0.46298898]
+#  ])
 
-y_pred = sigmoid(z)
+# b = 0.4220075973409705
 
-print("\nPredicted probabilities:")
-print(y_pred)
+# z = np.matmul(X, w) + b
+
+# print(z)
+
+# def sigmoid(z):
+#     return 1 / (1 + np.exp(-z))
+
+# y_pred = sigmoid(z)
+
+# print("\nPredicted probabilities:")
+# print(y_pred)
 
 # Now we need to figure out how we got these weights and bias!

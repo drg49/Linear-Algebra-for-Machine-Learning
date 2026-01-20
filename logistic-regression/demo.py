@@ -75,9 +75,10 @@ b = 0.0
 learning_rate = 0.1
 epochs = 2000
 
-print("X - Standardized Features (pclass, sex, age, fare):")
+print("\nX - Standardized Features (pclass, gender, age, fare):")
 print(X)
-print("Y (Output):")
+print("\nLength of X:", len(X))
+print("\nY (Output):")
 print(y)
 
 # --------------------------------------------------
@@ -90,29 +91,31 @@ for epoch in range(epochs):
     y_prediction = sigmoid(z)
 
     if (epoch % 200) == 0:
-        print(f"\n--- Epoch {epoch} ---")
+        print(f"\n\n--- Epoch {epoch} ---")
         print(f"\nWeights: {w.ravel()}")
-        print(f"Bias: {b}")
-        print(f"Linear combination (z = X @ w + b):")
+        print(f"\nBias: {b}")
+        print(f"\nLinear combination (z = X @ w + b):")
         print(z)
-        print(f"Y Predictions:")
+        print(f"\nY Predictions:")
         print_survival_probs(y_prediction)
 
     # loss
     loss = loss_fn(y, y_prediction)
 
-    # gradients
-    dz = y_prediction - y
+    # Compute gradients with backpropagation
+    dz = y_prediction - y # how wrong is the y_prediction from actual y?
     dw = (X.T @ dz) / len(X)
     db = np.mean(dz)
 
-    w -= learning_rate * dw   # update weights
-    b -= learning_rate * db   # update bias
+    w -= learning_rate * dw   # Move weights towards lower loss
+    b -= learning_rate * db   # Move bias towards lower loss
 
     if epoch % 200 == 0:
+        print("\ndz - How wrong is the prediction?")
+        print(dz)
         pred_labels = (y_prediction >= 0.5).astype(int)
         acc = (pred_labels == y).mean()
-        print(f"Loss={loss:.4f} Accuracy={acc:.3f}")
+        print(f"\nLoss={loss:.4f} Accuracy={acc:.3f}")
 
 # --------------------------------------------------
 # Final evaluation
